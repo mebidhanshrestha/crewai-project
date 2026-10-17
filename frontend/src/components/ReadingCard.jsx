@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { AGENTS } from "../agents.js";
 import { useT } from "../i18n.js";
@@ -41,15 +41,31 @@ function readable(text = "") {
 function RuleChip({ id, rule }) {
   const t = useT();
   const [open, setOpen] = useState(false);
+  const box = useRef(null);
   const share = typeof rule?.how_common === "number" ? Math.round(rule.how_common * 100) : null;
+
+  // Close on a tap outside or Escape (on phones the popup is a bottom sheet over the page).
+  useEffect(() => {
+    if (!open) return undefined;
+    const away = (e) => { if (!box.current?.contains(e.target)) setOpen(false); };
+    const esc = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", away);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("pointerdown", away);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [open]);
+
   return (
-    <span className="rule">
+    <span className="rule" ref={box}>
       <button type="button" className={`rule-chip ${rule?.tone ?? ""}`} aria-expanded={open}
         onClick={() => setOpen((o) => !o)}>
         <span aria-hidden>{rule?.tone === "caution" ? "◆" : "✦"}</span> {rule?.label ?? id}
       </button>
       {open && (
         <span className="rule-pop" role="note">
+          <button type="button" className="rule-close" aria-label={t.close} onClick={() => setOpen(false)}>✕</button>
           {rule ? (
             <>
               <strong>{rule.label}</strong>

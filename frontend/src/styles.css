@@ -454,3 +454,78 @@ th { color: var(--muted); font-weight: 500; font-size: 12px; }
 @media (max-width: 420px) {
   .brand > div { display: none; }
 }
+
+/* ---------- Mobile responsiveness ---------- */
+/* dvh tracks the visible viewport, so the composer isn't hidden behind mobile browser bars. */
+.app { height: 100vh; height: 100dvh; }
+.topbar { padding-top: max(12px, env(safe-area-inset-top)); }
+.composer { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+.ghost { display: inline-flex; align-items: center; gap: 6px; }
+.ghost svg { display: none; }
+.lang-select {
+  display: none; font: 500 13px var(--sans); color: var(--text); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; height: 36px; padding: 0 8px;
+}
+.deg-inline { display: none; color: var(--muted); font-size: 12px; }
+.rule-close { display: none; }
+
+/* Touch screens: comfortable tap targets. */
+@media (pointer: coarse) {
+  .rule-chip { min-height: 30px; padding: 4px 10px; }
+  .chip-btn, .suggestion { min-height: 44px; }
+  .feedback button { min-height: 32px; padding: 4px 14px; }
+  .fold summary { padding: 8px 0; }
+  .ghost.small { min-height: 36px; padding: 4px 14px; }
+}
+
+@media (max-width: 600px) {
+  /* Header: logo + short name, then compact controls on one line. */
+  .topbar { padding-left: 12px; padding-right: 12px; gap: 8px; }
+  .brand { gap: 8px; min-width: 0; flex: 1; }
+  .brand > div { display: block; min-width: 0; }
+  .brand strong { font-size: 15px; overflow: hidden; text-overflow: ellipsis; }
+  .tagline { display: none; }
+  .logo { flex: none; width: 32px; height: 32px; font-size: 16px; }
+  .topbar-actions { gap: 6px; flex: none; }
+  .lang-switch { display: none; }
+  .lang-select { display: block; }
+  .icon-btn, .ghost.panel-toggle, .ghost.new-chat { width: 40px; height: 40px; padding: 0; justify-content: center; }
+  .ghost svg { display: block; }
+  .btn-label { display: none; }
+
+  /* Chat */
+  .welcome { margin-top: 2vh; }
+  .welcome h1 { font-size: 26px; }
+  .how { gap: 6px 12px; }
+  .composer textarea { font-size: 16px; }  /* < 16px makes iOS Safari zoom on focus */
+  .composer-note { display: none; }
+  .msg.host .avatar { width: 28px; height: 28px; font-size: 12px; }
+  .bubble { max-width: 86%; }
+
+  /* Reading card */
+  .reading-head { flex-direction: column; gap: 8px; }
+  .reading-actions { width: 100%; justify-content: space-between; align-items: center; }
+  .strength { flex-direction: column; gap: 2px; }
+
+  /* Evidence popup: a bottom sheet with a close button. */
+  .rule-pop {
+    position: fixed; left: 12px; right: 12px; top: auto; width: auto; z-index: 40;
+    bottom: max(12px, env(safe-area-inset-bottom)); max-height: 60vh; overflow-y: auto;
+    padding: 16px 44px 16px 16px; box-shadow: 0 -8px 40px rgba(0, 0, 0, .25);
+  }
+  .rule-close {
+    display: grid; place-items: center; position: absolute; top: 8px; right: 8px;
+    width: 32px; height: 32px; border: 0; border-radius: 50%; cursor: pointer;
+    background: var(--surface-2); color: var(--muted); font-size: 14px;
+  }
+
+  /* Planet table: fold degrees into the sign column so all five columns fit. */
+  .deg { display: none; }
+  .deg-inline { display: inline; }
+  th, td { padding: 7px 6px; }
+  table { font-size: 13px; }
+  .facts { grid-template-columns: 1fr 1fr; }
+
+  /* Side panel takes the full width on small phones. */
+  .sidebar { width: 100vw; padding-top: max(16px, env(safe-area-inset-top)); }
+}

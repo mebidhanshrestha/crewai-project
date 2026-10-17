@@ -22,7 +22,7 @@ export default function ChartCard({ chart }) {
       <div className="table-wrap">
         <table>
           <thead>
-            <tr><th>{c.planet}</th><th>{c.sign}</th><th className="num">{c.degree}</th><th className="num">{c.house}</th><th>{c.dignity}</th></tr>
+            <tr><th>{c.planet}</th><th>{c.sign}</th><th className="num deg">{c.degree}</th><th className="num">{c.house}</th><th>{c.dignity}</th></tr>
           </thead>
           <tbody>
             {ORDER.filter((p) => chart.planets[p]).map((p) => {
@@ -30,8 +30,8 @@ export default function ChartCard({ chart }) {
               return (
                 <tr key={p}>
                   <td>{p}</td>
-                  <td>{pl.sign}</td>
-                  <td className="num">{pl.degree.toFixed(2)}°</td>
+                  <td>{pl.sign}<span className="deg-inline"> {Math.round(pl.degree)}°</span></td>
+                  <td className="num deg">{pl.degree.toFixed(2)}°</td>
                   <td className="num">{pl.house}</td>
                   <td>{pl.dignity !== "neutral" && <span className={`dignity ${pl.dignity}`}>{pl.dignity}</span>}</td>
                 </tr>

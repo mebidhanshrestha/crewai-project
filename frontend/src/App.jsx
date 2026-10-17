@@ -151,6 +151,7 @@ export default function App() {
             </div>
           </div>
           <div className="topbar-actions">
+            {/* Segmented control on wide screens, a compact select on phones. */}
             <div className="lang-switch" role="group" aria-label="Language">
               {LANGS.map((l) => (
                 <button key={l.code} type="button" lang={l.code} aria-pressed={lang === l.code}
@@ -159,16 +160,26 @@ export default function App() {
                 </button>
               ))}
             </div>
+            <select className="lang-select" aria-label="Language" value={lang} onChange={(e) => setLang(e.target.value)}>
+              {LANGS.map((l) => <option key={l.code} value={l.code}>{l.label}</option>)}
+            </select>
             <button type="button" className="icon-btn" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label={theme === "dark" ? t.themeLight : t.themeDark} title={theme === "dark" ? t.themeLight : t.themeDark}>
               {theme === "dark" ? "☀" : "☾"}
             </button>
             <button type="button" className="ghost panel-toggle" onClick={() => setPanelOpen((o) => !o)}
-              aria-expanded={panelOpen}>
-              {t.council}
+              aria-expanded={panelOpen} aria-label={t.council} title={t.council}>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
+                <path d="M4 5h16v14H4zM14 5v14" fill="none" stroke="currentColor" strokeWidth="1.8" />
+              </svg>
+              <span className="btn-label">{t.council}</span>
             </button>
-            <button type="button" className="ghost" onClick={newConversation} disabled={busy}>
-              {t.newChat}
+            <button type="button" className="ghost new-chat" onClick={newConversation} disabled={busy}
+              aria-label={t.newChat} title={t.newChat}>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
+                <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              <span className="btn-label">{t.newChat}</span>
             </button>
           </div>
         </header>
