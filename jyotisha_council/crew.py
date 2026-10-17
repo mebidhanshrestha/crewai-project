@@ -26,7 +26,13 @@ PIPELINE = [
 
 
 def make_llm() -> LLM:
-    return LLM(model=os.getenv("LLM_MODEL", "openai/gpt-5-mini"))
+    model = os.getenv("LLM_MODEL", "openai/gpt-5-mini")
+    # Reasoning models spend most of their output tokens "thinking". These tasks are short and
+    # well-specified, so low effort keeps cost and latency down. Set REASONING_EFFORT= to disable.
+    effort = os.getenv("REASONING_EFFORT", "low")
+    if effort and model.split("/")[-1].startswith(("gpt-5", "o1", "o3", "o4")):
+        return LLM(model=model, reasoning_effort=effort)
+    return LLM(model=model)
 
 
 @CrewBase
