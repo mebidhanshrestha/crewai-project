@@ -1,0 +1,8 @@
+crewai==1.15.28
+pyswisseph==2.10.3.2
+python-dotenv
+pytest
+fastapi
+uvicorn[standard]
+pyyaml
+cryptography

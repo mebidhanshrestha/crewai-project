@@ -1,0 +1,887 @@
+{
+  "version": "0.2.0",
+  "note": "Illustrative starter library in the Parashari tradition. Every rule, and the Nepali and Japanese labels, should be reviewed by a qualified astrologer and native speakers before production use.",
+  "rules": [
+    {
+      "id": "R-GEN-01",
+      "name": "Gaja Kesari Yoga",
+      "label": {
+        "en": "Wisdom and support from others",
+        "ne": "बुद्धि र अरूको साथ",
+        "ja": "知恵と周囲からの支え"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "wealth",
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "planet_from_planet",
+          "planet": "Jupiter",
+          "from": "Moon",
+          "houses": [
+            1,
+            4,
+            7,
+            10
+          ]
+        }
+      ],
+      "reading": "Jupiter in a kendra from the Moon: good judgement, respect from others and support during difficulties."
+    },
+    {
+      "id": "R-GEN-02",
+      "name": "Strong Lagna lord",
+      "label": {
+        "en": "A strong sense of self",
+        "ne": "बलियो आत्मविश्वास",
+        "ja": "強い自己意識"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 1,
+          "houses": [
+            1,
+            4,
+            5,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "reading": "The Lagna lord sits in a kendra or trikona: a resilient sense of self and the ability to steer one's own life."
+    },
+    {
+      "id": "R-GEN-03",
+      "name": "Bhagya lord well placed",
+      "label": {
+        "en": "Luck that comes through effort and mentors",
+        "ne": "मेहनत र गुरुबाट आउने भाग्य",
+        "ja": "努力と師から開ける運"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 9,
+          "houses": [
+            1,
+            9,
+            10,
+            11
+          ]
+        }
+      ],
+      "reading": "The 9th lord is well placed: fortune, mentors and opportunities tend to arrive through effort and guidance."
+    },
+    {
+      "id": "R-GEN-04",
+      "name": "Lagna lord in a dusthana",
+      "label": {
+        "en": "Your energy needs protecting",
+        "ne": "आफ्नो ऊर्जाको ख्याल राख्नुपर्ने",
+        "ja": "エネルギーを大切に守る時"
+      },
+      "tone": "caution",
+      "topics": [
+        "general",
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 1,
+          "houses": [
+            6,
+            8,
+            12
+          ]
+        }
+      ],
+      "reading": "The Lagna lord sits in the 6th, 8th or 12th: life asks for care with energy and boundaries; rest and routine help you stay steady."
+    },
+    {
+      "id": "R-CAR-01",
+      "name": "10th lord in kendra or trikona",
+      "label": {
+        "en": "A career set to grow steadily",
+        "ne": "क्रमशः बढ्ने करियर",
+        "ja": "着実に伸びるキャリア"
+      },
+      "tone": "supportive",
+      "topics": [
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 10,
+          "houses": [
+            1,
+            4,
+            5,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "reading": "The 10th lord is in a kendra or trikona: a career that can grow steadily and bring recognition."
+    },
+    {
+      "id": "R-CAR-02",
+      "name": "Sun in the 10th house",
+      "label": {
+        "en": "Natural leadership at work",
+        "ne": "काममा स्वाभाविक नेतृत्व",
+        "ja": "仕事での自然なリーダーシップ"
+      },
+      "tone": "supportive",
+      "topics": [
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Sun",
+          "houses": [
+            10
+          ]
+        }
+      ],
+      "reading": "The Sun has directional strength in the 10th: leadership, visibility and comfort with authority."
+    },
+    {
+      "id": "R-CAR-03",
+      "name": "Saturn in the 10th house",
+      "label": {
+        "en": "A slow but lasting career",
+        "ne": "ढिलो तर दिगो करियर",
+        "ja": "ゆっくりでも長続きするキャリア"
+      },
+      "tone": "caution",
+      "topics": [
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Saturn",
+          "houses": [
+            10
+          ]
+        }
+      ],
+      "reading": "Saturn in the 10th: a slower but durable career built on discipline and responsibility."
+    },
+    {
+      "id": "R-CAR-04",
+      "name": "Mercury in Lagna or 10th",
+      "label": {
+        "en": "Strength in communication and tech",
+        "ne": "सञ्चार र प्रविधिमा क्षमता",
+        "ja": "コミュニケーションと技術の強み"
+      },
+      "tone": "supportive",
+      "topics": [
+        "career",
+        "education"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Mercury",
+          "houses": [
+            1,
+            10
+          ]
+        }
+      ],
+      "reading": "Mercury in the 1st or 10th: strength in communication, analysis, trade and technology work."
+    },
+    {
+      "id": "R-CAR-05",
+      "name": "Rahu in an upachaya house",
+      "label": {
+        "en": "Ambition that grows over time",
+        "ne": "समयसँगै बढ्ने महत्वाकांक्षा",
+        "ja": "時とともに育つ向上心"
+      },
+      "tone": "supportive",
+      "topics": [
+        "career",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Rahu",
+          "houses": [
+            3,
+            6,
+            10,
+            11
+          ]
+        }
+      ],
+      "reading": "Rahu in an upachaya house: ambition that grows with time and openness to unconventional or foreign paths."
+    },
+    {
+      "id": "R-CAR-06",
+      "name": "10th lord in a dusthana",
+      "label": {
+        "en": "Career progress that needs persistence",
+        "ne": "धैर्य चाहिने करियर प्रगति",
+        "ja": "粘り強さが必要なキャリアの進展"
+      },
+      "tone": "caution",
+      "topics": [
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 10,
+          "houses": [
+            6,
+            8,
+            12
+          ]
+        }
+      ],
+      "reading": "The 10th lord sits in the 6th, 8th or 12th: career progress tends to come through service, research or behind-the-scenes work, and needs persistence."
+    },
+    {
+      "id": "R-MAR-01",
+      "name": "7th lord well placed",
+      "label": {
+        "en": "Partnerships are well supported",
+        "ne": "साझेदारीलाई राम्रो साथ",
+        "ja": "パートナーシップに恵まれる"
+      },
+      "tone": "supportive",
+      "topics": [
+        "marriage"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 7,
+          "houses": [
+            1,
+            4,
+            5,
+            7,
+            9,
+            10,
+            11
+          ]
+        }
+      ],
+      "reading": "The 7th lord is well placed: partnerships are supported and a committed relationship can bring growth."
+    },
+    {
+      "id": "R-MAR-02",
+      "name": "7th lord in a dusthana",
+      "label": {
+        "en": "Relationships that need patience",
+        "ne": "धैर्य चाहिने सम्बन्ध",
+        "ja": "忍耐が必要な人間関係"
+      },
+      "tone": "caution",
+      "topics": [
+        "marriage"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 7,
+          "houses": [
+            6,
+            8,
+            12
+          ]
+        }
+      ],
+      "reading": "The 7th lord is in the 6th, 8th or 12th: partnerships may need extra patience, clear communication and time."
+    },
+    {
+      "id": "R-MAR-03",
+      "name": "Venus dignified",
+      "label": {
+        "en": "Warmth and harmony in love",
+        "ne": "प्रेममा न्यानोपन र मेल",
+        "ja": "愛情における温かさと調和"
+      },
+      "tone": "supportive",
+      "topics": [
+        "marriage",
+        "general"
+      ],
+      "conditions": [
+        {
+          "type": "planet_dignity",
+          "planet": "Venus",
+          "dignity": [
+            "exalted",
+            "own"
+          ]
+        }
+      ],
+      "reading": "Venus is exalted or in its own sign: warmth, artistic taste and harmony in relationships."
+    },
+    {
+      "id": "R-MAR-04",
+      "name": "Mangal placement (Manglik check)",
+      "label": {
+        "en": "Manglik check (common, often cancelled)",
+        "ne": "मांगलिक जाँच (सामान्य, प्रायः रद्द हुने)",
+        "ja": "マンガリク確認（よくあり、打ち消されることが多い）"
+      },
+      "tone": "caution",
+      "topics": [
+        "marriage"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Mars",
+          "houses": [
+            1,
+            2,
+            4,
+            7,
+            8,
+            12
+          ]
+        }
+      ],
+      "reading": "Mars is in a house traditionally checked for Manglik status. This is common, often cancelled by other factors, and should be assessed in matching, not feared."
+    },
+    {
+      "id": "R-MAR-05",
+      "name": "Jupiter in the 7th house",
+      "label": {
+        "en": "A wise, supportive partner",
+        "ne": "बुद्धिमान, सहयोगी जीवनसाथी",
+        "ja": "賢く支えになるパートナー"
+      },
+      "tone": "supportive",
+      "topics": [
+        "marriage"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Jupiter",
+          "houses": [
+            7
+          ]
+        }
+      ],
+      "reading": "Jupiter in the 7th: a wise, supportive partner and partnerships grounded in shared values."
+    },
+    {
+      "id": "R-MAR-06",
+      "name": "Venus debilitated",
+      "label": {
+        "en": "Love that grows with understanding",
+        "ne": "बुझाइसँगै बढ्ने प्रेम",
+        "ja": "理解とともに深まる愛"
+      },
+      "tone": "caution",
+      "topics": [
+        "marriage"
+      ],
+      "conditions": [
+        {
+          "type": "planet_dignity",
+          "planet": "Venus",
+          "dignity": [
+            "debilitated"
+          ]
+        }
+      ],
+      "reading": "Venus is debilitated: affection may be expressed through practical care rather than words; patience and understanding help love grow."
+    },
+    {
+      "id": "R-WEA-01",
+      "name": "Dhana Yoga (2nd and 11th lords)",
+      "label": {
+        "en": "Savings and income work together",
+        "ne": "बचत र आम्दानी सँगै बढ्ने",
+        "ja": "貯蓄と収入が支え合う"
+      },
+      "tone": "supportive",
+      "topics": [
+        "wealth"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 2,
+          "houses": [
+            11
+          ]
+        }
+      ],
+      "reading": "The 2nd lord sits in the 11th: savings and income support each other when managed well."
+    },
+    {
+      "id": "R-WEA-02",
+      "name": "11th lord in the 2nd",
+      "label": {
+        "en": "Gains that turn into savings",
+        "ne": "लाभ बचतमा बदलिने",
+        "ja": "利益が蓄えに変わる"
+      },
+      "tone": "supportive",
+      "topics": [
+        "wealth"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 11,
+          "houses": [
+            2
+          ]
+        }
+      ],
+      "reading": "The 11th lord sits in the 2nd: gains tend to turn into accumulated resources."
+    },
+    {
+      "id": "R-WEA-03",
+      "name": "Jupiter in 2nd or 11th",
+      "label": {
+        "en": "Growth through knowledge",
+        "ne": "ज्ञानबाट हुने वृद्धि",
+        "ja": "知識による成長"
+      },
+      "tone": "supportive",
+      "topics": [
+        "wealth"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Jupiter",
+          "houses": [
+            2,
+            11
+          ]
+        }
+      ],
+      "reading": "Jupiter in the 2nd or 11th: growth in resources through knowledge, teaching or good advice."
+    },
+    {
+      "id": "R-WEA-04",
+      "name": "11th lord in the 12th",
+      "label": {
+        "en": "Spending can outpace gains",
+        "ne": "खर्च आम्दानीभन्दा छिटो बढ्न सक्ने",
+        "ja": "支出が収入を上回りやすい"
+      },
+      "tone": "caution",
+      "topics": [
+        "wealth"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 11,
+          "houses": [
+            12
+          ]
+        }
+      ],
+      "reading": "The 11th lord sits in the 12th: gains can flow out as quickly as they come in; a budget and savings habit protect what you earn."
+    },
+    {
+      "id": "R-EDU-01",
+      "name": "5th lord in kendra or trikona",
+      "label": {
+        "en": "A sharp, creative mind",
+        "ne": "तीक्ष्ण, सिर्जनशील दिमाग",
+        "ja": "鋭く創造的な頭脳"
+      },
+      "tone": "supportive",
+      "topics": [
+        "education"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 5,
+          "houses": [
+            1,
+            4,
+            5,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "reading": "The 5th lord is well placed: a sharp mind, good learning ability and creative thinking."
+    },
+    {
+      "id": "R-EDU-02",
+      "name": "Mercury dignified",
+      "label": {
+        "en": "A quick learner",
+        "ne": "छिटो सिक्ने क्षमता",
+        "ja": "飲み込みの早さ"
+      },
+      "tone": "supportive",
+      "topics": [
+        "education",
+        "career"
+      ],
+      "conditions": [
+        {
+          "type": "planet_dignity",
+          "planet": "Mercury",
+          "dignity": [
+            "exalted",
+            "own"
+          ]
+        }
+      ],
+      "reading": "Mercury is exalted or in its own sign: quick learning, clear analysis and strong communication."
+    },
+    {
+      "id": "R-EDU-03",
+      "name": "Mercury debilitated",
+      "label": {
+        "en": "Learning works best with structure",
+        "ne": "व्यवस्थित तरिकाले राम्रो सिकाइ",
+        "ja": "計画的に学ぶと伸びる"
+      },
+      "tone": "caution",
+      "topics": [
+        "education"
+      ],
+      "conditions": [
+        {
+          "type": "planet_dignity",
+          "planet": "Mercury",
+          "dignity": [
+            "debilitated"
+          ]
+        }
+      ],
+      "reading": "Mercury is debilitated: learning works best with structure, repetition and hands-on practice rather than cramming."
+    },
+    {
+      "id": "R-TRV-01",
+      "name": "Rahu in the 12th house",
+      "label": {
+        "en": "A pull toward foreign lands",
+        "ne": "विदेशतर्फको आकर्षण",
+        "ja": "海外への引き寄せ"
+      },
+      "tone": "supportive",
+      "topics": [
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "planet_in_house",
+          "planet": "Rahu",
+          "houses": [
+            12
+          ]
+        }
+      ],
+      "reading": "Rahu in the 12th: interest in foreign lands and possible settlement or work abroad."
+    },
+    {
+      "id": "R-TRV-02",
+      "name": "12th lord in 9th or 12th",
+      "label": {
+        "en": "Travel and time abroad supported",
+        "ne": "यात्रा र विदेश बसाइलाई साथ",
+        "ja": "旅行や海外生活に追い風"
+      },
+      "tone": "supportive",
+      "topics": [
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 12,
+          "houses": [
+            9,
+            12
+          ]
+        }
+      ],
+      "reading": "The 12th lord sits in the 9th or 12th: long-distance travel and time abroad are supported."
+    },
+    {
+      "id": "R-TRV-03",
+      "name": "4th lord in 1st or 4th",
+      "label": {
+        "en": "A strong pull toward home",
+        "ne": "घरप्रतिको बलियो लगाव",
+        "ja": "故郷への強い結びつき"
+      },
+      "tone": "caution",
+      "topics": [
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "house_lord_in_house",
+          "house": 4,
+          "houses": [
+            1,
+            4
+          ]
+        }
+      ],
+      "reading": "The 4th lord sits in the 1st or 4th: a strong attachment to home and family; time abroad may feel best when roots stay close."
+    },
+    {
+      "id": "R-DAS-JUP",
+      "name": "Jupiter mahadasha",
+      "label": {
+        "en": "Your Jupiter period: growth and learning",
+        "ne": "तपाईंको बृहस्पति दशा: वृद्धि र सिकाइ",
+        "ja": "木星期：成長と学び"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Jupiter"
+        }
+      ],
+      "reading": "Jupiter mahadasha: a period of expansion, learning, mentors and growth in wisdom."
+    },
+    {
+      "id": "R-DAS-SAT",
+      "name": "Saturn mahadasha",
+      "label": {
+        "en": "Your Saturn period: patience pays off",
+        "ne": "तपाईंको शनि दशा: धैर्यले फल दिने",
+        "ja": "土星期：忍耐が実を結ぶ"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Saturn"
+        }
+      ],
+      "reading": "Saturn mahadasha: a period that rewards patience, structure and consistent hard work."
+    },
+    {
+      "id": "R-DAS-VEN",
+      "name": "Venus mahadasha",
+      "label": {
+        "en": "Your Venus period: love and creativity",
+        "ne": "तपाईंको शुक्र दशा: प्रेम र सिर्जनशीलता",
+        "ja": "金星期：愛と創造性"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Venus"
+        }
+      ],
+      "reading": "Venus mahadasha: a period favouring relationships, creativity, comfort and the arts."
+    },
+    {
+      "id": "R-DAS-RAH",
+      "name": "Rahu mahadasha",
+      "label": {
+        "en": "Your Rahu period: big ambitions",
+        "ne": "तपाईंको राहु दशा: ठूला महत्वाकांक्षा",
+        "ja": "ラーフ期：大きな野心"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Rahu"
+        }
+      ],
+      "reading": "Rahu mahadasha: a period of big ambitions, new technology, foreign links and unconventional choices."
+    },
+    {
+      "id": "R-DAS-MER",
+      "name": "Mercury mahadasha",
+      "label": {
+        "en": "Your Mercury period: study and skills",
+        "ne": "तपाईंको बुध दशा: अध्ययन र सीप",
+        "ja": "水星期：学びとスキル"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Mercury"
+        }
+      ],
+      "reading": "Mercury mahadasha: a period for study, business, writing and building skills."
+    },
+    {
+      "id": "R-DAS-SUN",
+      "name": "Sun mahadasha",
+      "label": {
+        "en": "Your Sun period: recognition",
+        "ne": "तपाईंको सूर्य दशा: पहिचान",
+        "ja": "太陽期：評価と認知"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Sun"
+        }
+      ],
+      "reading": "Sun mahadasha: a period of visibility, leadership and recognition from authority."
+    },
+    {
+      "id": "R-DAS-MON",
+      "name": "Moon mahadasha",
+      "label": {
+        "en": "Your Moon period: home and feelings",
+        "ne": "तपाईंको चन्द्र दशा: घर र भावना",
+        "ja": "月期：家庭と心"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Moon"
+        }
+      ],
+      "reading": "Moon mahadasha: a period centred on home, family, emotions and public connection."
+    },
+    {
+      "id": "R-DAS-MAR",
+      "name": "Mars mahadasha",
+      "label": {
+        "en": "Your Mars period: energy and action",
+        "ne": "तपाईंको मंगल दशा: ऊर्जा र कर्म",
+        "ja": "火星期：エネルギーと行動"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Mars"
+        }
+      ],
+      "reading": "Mars mahadasha: a period of energy, courage, competition and decisive action."
+    },
+    {
+      "id": "R-DAS-KET",
+      "name": "Ketu mahadasha",
+      "label": {
+        "en": "Your Ketu period: reflection",
+        "ne": "तपाईंको केतु दशा: आत्मचिन्तन",
+        "ja": "ケートゥ期：内省"
+      },
+      "tone": "supportive",
+      "topics": [
+        "general",
+        "career",
+        "education",
+        "marriage",
+        "wealth",
+        "travel"
+      ],
+      "conditions": [
+        {
+          "type": "mahadasha",
+          "lord": "Ketu"
+        }
+      ],
+      "reading": "Ketu mahadasha: a period of introspection, specialised skills and letting go of what no longer fits."
+    }
+  ]
+}

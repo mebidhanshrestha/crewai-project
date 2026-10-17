@@ -1,0 +1,11 @@
+.venv/
+.env
+__pycache__/
+.pytest_cache/
+jyotisha_council/data/ledger.json
+frontend/node_modules/
+frontend/dist/
+jyotisha_council/data/profiles.enc
+jyotisha_council/data/.profile_key
+jyotisha_council/data/sessions/
+jyotisha_council/data/metrics.jsonl
