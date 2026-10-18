@@ -68,6 +68,19 @@ architectural, not the optimisation: "reply in the language the person writes in
 web API layer, so any other path (tests, benchmark) depended on the orchestrator remembering to
 save the language. It now lives in the chat turn itself; the re-run was fully correct.
 
+## A hallucination the behaviour tests caught
+
+After the orchestrator change, 13 of 14 behaviour tests passed. The failure: for a Nepali
+question, the orchestrator **wrote a reading itself without handing off to any agent**, claiming
+a "Saturn mahadasha" with no chart computed and no rules checked. "Never read a chart yourself"
+was only a prompt instruction, and prompts are not guarantees.
+
+Fix, in code rather than in the prompt: a guardrail on every orchestrator reply rejects text
+that looks like a reading (two or more reading section headings in any of the three languages,
+or rule codes) unless a reading went through the Guardian in that same turn, and tells the
+orchestrator to hand off instead. Ordinary chat and explaining terms still pass. The three
+reading tests (English, Japanese, Nepali) then passed, and a unit test now covers it.
+
 ## Caveats
 
 - Three readings per run: LLM outputs vary, so treat the percentages as indicative.

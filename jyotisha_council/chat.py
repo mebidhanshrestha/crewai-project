@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field
 from common import DISCLAIMER, PLACES, normalize_language
 from crew import make_llm
 from observability import agent_span
-from guardrails import (chat_guardrail, check_citations, check_question, detect_language,
+from guardrails import (check_citations, check_question, detect_language, make_chat_guardrail,
                         make_safety_guardrail)
 from store import (DATA, append_prediction, delete_sessions_for, forget_person, get_profile,
                    ledger_for, load_session, save_profile, save_session, set_outcome)
@@ -55,6 +55,7 @@ class ChatSession:
         self.profile: dict = saved.get("profile", {"language": "English"})
         self.emit: Callable[[str, dict], None] = lambda event, data: None
         self.reading: dict | None = None  # the reading being orchestrated in this turn
+        self.delivered_reading = False    # set when the Guardian approves a reading this turn
         self.host_llm = None
 
     def missing(self) -> list[str]:
@@ -269,6 +270,7 @@ class HandoffGuardianTool(_ReadingTool):
         answer = _run_specialist(s, "guardian", prompt, guardrail=make_safety_guardrail(state))
 
         append_prediction(s.profile["name"], r["question"], answer, sorted(state["matched_rule_ids"]))
+        s.delivered_reading = True
         metrics = _metrics(s)
         s.emit("reading", {"question": r["question"], "disclaimer": DISCLAIMER[language], "answer": answer,
                            "chart": state["chart"], "rules": state["matches"], "strength": state["strength"],
@@ -354,6 +356,7 @@ def run_turn(session: ChatSession, message: str, interface_language: str | None 
     interface language they picked; otherwise whatever was saved before.
     """
     message = SPOOFED_CONTEXT.sub("", message).strip() or "(empty message)"
+    session.delivered_reading = False
     written = {"ne": "Nepali", "ja": "Japanese"}.get(detect_language(message))
     if written or interface_language:
         session.profile["language"] = written or normalize_language(interface_language)
@@ -370,7 +373,7 @@ def run_turn(session: ChatSession, message: str, interface_language: str | None 
                    HandoffGanitaTool(session=session), HandoffShastraTool(session=session),
                    HandoffSmritiTool(session=session), HandoffGuardianTool(session=session),
                    RecordFeedbackTool(session=session), ForgetMeTool(session=session)],
-            llm=session.host_llm, guardrail=chat_guardrail, guardrail_max_retries=1,
+            llm=session.host_llm, guardrail=make_chat_guardrail(session), guardrail_max_retries=2,
             max_iter=12, verbose=False,
         )
         known = {k: v for k, v in session.profile.items() if k not in ("latitude", "longitude")}

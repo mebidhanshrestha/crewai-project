@@ -167,3 +167,15 @@ def test_session_ids_are_validated():
     import store
     with pytest.raises(ValueError):
         store.load_session("../../etc/passwd")
+
+
+def test_orchestrator_cannot_write_a_reading_without_the_council():
+    from guardrails import looks_like_reading, make_chat_guardrail
+
+    hallucinated = "सीधा उत्तर:\nयो वर्ष राम्रो छ।\n\nकिन (प्रमाण):\n• शनि महादशा..."
+    assert looks_like_reading(hallucinated)
+    assert looks_like_reading("結論：はい。\n根拠（エビデンス）：…")
+    assert not looks_like_reading("Namaste! What is your birth date?")
+    assert not looks_like_reading("A dasha is a life period in Vedic astrology.")
+    assert make_chat_guardrail(SimpleNamespace(delivered_reading=False))(out(hallucinated))[0] is False
+    assert make_chat_guardrail(SimpleNamespace(delivered_reading=True))(out(hallucinated))[0] is True

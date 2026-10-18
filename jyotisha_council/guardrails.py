@@ -146,8 +146,32 @@ def make_safety_guardrail(state: dict) -> Callable:
     return safety_guardrail
 
 
+READING_HEADINGS = re.compile(
+    r"(Direct answer|Why \(Evidence Mode\)|Practical suggestion|सीधा उत्तर|किन \(प्रमाण\)|व्यावहारिक सुझाव|"
+    r"結論|根拠（エビデンス）|実践的なアドバイス)\s*[:：]")
+
+
+def looks_like_reading(text: str) -> bool:
+    """A reading has the council's section headings or rule codes; small talk does not."""
+    return len(set(READING_HEADINGS.findall(text))) >= 2 or bool(RULE_ID.search(text))
+
+
 def chat_guardrail(output) -> Tuple[bool, Any]:
     """Runs on every chat reply from the host, including small talk."""
     if problem := find_unsafe(output.raw):
         return False, f"Your reply {problem}. Rewrite it calmly, without that."
     return True, output.raw
+
+
+def make_chat_guardrail(session) -> Callable:
+    """The orchestrator may not write a reading itself: readings must come through the council."""
+    def orchestrator_guardrail(output) -> Tuple[bool, Any]:
+        ok, result = chat_guardrail(output)
+        if not ok:
+            return ok, result
+        if looks_like_reading(output.raw) and not session.delivered_reading:
+            return False, ("You wrote a reading without the council. Do not interpret the chart "
+                           "yourself: call handoff_to_ganita, then handoff_to_shastra, then send "
+                           "your draft with handoff_to_guardian.")
+        return True, output.raw
+    return orchestrator_guardrail
