@@ -25,11 +25,14 @@ PIPELINE = [
 ]
 
 
-def make_llm() -> LLM:
+def make_llm(effort: str | None = None) -> LLM:
+    """effort overrides REASONING_EFFORT for one agent (e.g. "minimal" for data-fetching agents)."""
     model = os.getenv("LLM_MODEL", "openai/gpt-5-mini")
     # Reasoning models spend most of their output tokens "thinking". These tasks are short and
-    # well-specified, so low effort keeps cost and latency down. Set REASONING_EFFORT= to disable.
-    effort = os.getenv("REASONING_EFFORT", "low")
+    # well-specified, so low effort keeps cost and latency down. REASONING_EFFORT= (empty)
+    # turns this off everywhere, which is how the baseline benchmark was measured.
+    default = os.getenv("REASONING_EFFORT", "low")
+    effort = (effort or default) if default else None
     if effort and model.split("/")[-1].startswith(("gpt-5", "o1", "o3", "o4")):
         return LLM(model=model, reasoning_effort=effort)
     return LLM(model=model)

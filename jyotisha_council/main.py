@@ -77,6 +77,8 @@ def main() -> None:
     except Exception as exc:
         sys.exit(f"\nThe council could not finish: {explain_llm_error(exc)}")
 
+    from observability import flush_traces
+    flush_traces()
     m = reading["metrics"]
     print("\n" + "=" * 60 + f"\n{humanize(reading['answer'], language)}\n\n_{DISCLAIMER[language]}_\n" + "=" * 60)
     print(f"{m['seconds_total']}s · {m['llm_calls']} LLM calls · {m['total_tokens']:,} tokens")

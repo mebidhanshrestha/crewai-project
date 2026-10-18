@@ -6,7 +6,7 @@ import { useT } from "../i18n.js";
 export default function CouncilProgress({ question, steps, failed, started }) {
   const t = useT();
   const [now, setNow] = useState(Date.now());
-  const running = !failed && Object.values(steps).some((s) => s !== "done");
+  const running = !failed && Object.values(steps).some((s) => s !== "done" && s !== "skipped");
 
   // A reading takes about a minute and a half, so show that time is passing.
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function CouncilProgress({ question, steps, failed, started }) {
     return () => clearInterval(id);
   }, [running]);
 
-  const doneCount = Object.values(steps).filter((s) => s === "done").length;
+  const doneCount = Object.values(steps).filter((s) => s === "done" || s === "skipped").length;
   return (
     <div className="card progress-card">
       <p className="progress-title">

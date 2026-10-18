@@ -62,42 +62,40 @@ A typical conversation:
 
 ## How it works
 
+Parashar is the **orchestrator**: the only agent that talks to the person, and the one that
+hands off to each specialist in turn and decides whether Smriti is needed.
+
 ```
  you ──► [Input guardrail, en/ne/ja] ── blocked? → kind refusal in your language, no LLM call
               │
               ▼
-        ┌────────────┐  tools: remember_birth_details, record_reading_feedback, forget_me
-        │  Parashar  │  small talk, collects details, decides when to hand off
-        │   (host)   │  every reply passes chat_guardrail
-        └─────┬──────┘
-              │ consult_council(question)   ← the soft handoff
-              ▼
-  ┌─────────┐  chart  ┌─────────┐  rules + IDs  ┌──────────┐  draft  ┌──────────┐
-  │ Ganita  │───────► │ Shastra │─────────────► │ Parashar │───────► │ Guardian │──► reading
-  │ (calc)  │         │ (rules) │       ┌─────► │ (writer) │         │ (ethics) │      │
-  └────┬────┘         └────┬────┘       │       └────┬─────┘         └────┬─────┘      ▼
-       │                   │      ┌─────┴────┐       │                    │     Prediction
-  chart_calculator    rule_lookup │  Smriti  │  evidence guardrail   safety guardrail  Ledger
-  (Swiss Ephemeris)   + base rates│ (memory) │  (cites matched IDs)  (+ evidence re-check)
-                                  └────┬─────┘
-                                  ledger_recall
+   ┌───────────────────────────┐   remember_birth_details, record_reading_feedback, forget_me
+   │ Parashar (orchestrator)   │   every reply passes chat_guardrail
+   └──┬────────┬────────┬──────┴──────────────┐
+      │ 1      │ 2      │ 3 (optional)         │ 4: Parashar writes the draft, then
+      ▼        ▼        ▼                      ▼
+   Ganita   Shastra   Smriti               Guardian ──► reading + Prediction Ledger
+   chart    rules +   history              safety review; draft citing unmatched rules
+            evidence                       is handed back to Parashar with the reason
 ```
 
 | Agent | Job | Tools |
 |---|---|---|
-| **Parashar** | Hosts the chat; inside the council, writes the reading in Evidence Mode | `remember_birth_details`, `consult_council`, `record_reading_feedback`, `forget_me` |
+| **Parashar** | Orchestrator: talks to the person, hands off, writes the draft | `remember_birth_details`, `handoff_to_ganita`, `handoff_to_shastra`, `handoff_to_smriti`, `handoff_to_guardian`, `record_reading_feedback`, `forget_me` |
 | **Ganita** | Sidereal chart, nakshatra, Vimshottari dasha | `chart_calculator` (Swiss Ephemeris; takes no arguments) |
-| **Shastra** | Matches rules for up to 2 topics and ranks the evidence against 3,000 random charts | `rule_lookup` (`data/rules.json`, `data/base_rates.json`) |
-| **Smriti** | Recalls past questions, outcomes and saved birth details | `ledger_recall` (`data/ledger.json`, `data/profiles.enc`) |
+| **Shastra** | Matches rules for 1–2 topics, ranks the evidence against 3,000 random charts | `rule_lookup` |
+| **Smriti** | Recalls past questions and outcomes (only when the orchestrator decides it matters) | `ledger_recall` |
 | **Guardian** | Removes anything unsafe, keeps citations | none |
 
 ### Soft handoffs
-- **Host to council:** Parashar decides for itself when a message needs a reading and calls
-  `consult_council`. Greetings, small talk and collecting details never reach the council.
-- **Inside the council:** agents don't call each other directly. Each task ends with a
-  `HANDOFF to <agent>:` note, and CrewAI's `context=[...]` passes those outputs on.
-- **On rejection:** when a guardrail rejects a draft, the agent gets the **reason** and rewrites
-  it instead of the run crashing.
+- **The orchestrator decides.** Greetings and collecting details never reach the specialists;
+  a life question starts `handoff_to_ganita`, then Shastra, Smriti if history matters, then
+  Parashar's draft goes to the Guardian. Instructions for each handoff are in `config/handoffs.yaml`.
+- **Code enforces what must not be skipped:** the Guardian refuses a draft until Ganita and
+  Shastra have run, and a draft citing a rule Shastra didn't match is handed back to Parashar
+  with the reason instead of being reviewed.
+- **The terminal version** (`python crew.py`) runs the same agents as a fixed sequential Crew
+  (`crew.py`), where each task passes a `HANDOFF to <agent>:` note through `context=[...]`.
 
 ### Guardrails (all plain code, English / Nepali / Japanese)
 1. **Input guardrail:** messages about death, health, legal cases or self-harm are declined before
@@ -173,6 +171,23 @@ The slowest step is Parashar writing the reading.
 > All five agents share one LLM object here, so it counted every call five times (it reported
 > about 42 calls and 101,000 tokens per reading). `run_council` reads the shared LLM's counter
 > directly, and records tokens per agent from it.
+
+## Monitoring with LangSmith
+
+With `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` in `.env`, every
+OpenAI call is traced to LangSmith through OpenTelemetry (`observability.py`), nested under a
+named span per agent, so each conversation shows as a tree: Parashar → Ganita / Shastra /
+Smriti / Guardian, with tokens and latency on every step.
+
+**Token optimisation:** see [`evals/benchmarks/REPORT.md`](evals/benchmarks/REPORT.md). Measured
+with LangSmith on the same benchmark before and after: **-37% tokens, -59% time per reading**,
+with every reading still correct.
+
+```bash
+cd jyotisha_council
+python ../evals/benchmark.py <label>                  # traced to LangSmith project jyotisha-<label>
+python ../evals/langsmith_report.py jyotisha-<label>  # tokens and time per agent
+```
 
 ## Metrics
 
@@ -252,6 +267,10 @@ LLM_MODEL=openai/gpt-5-mini               # swap provider with one line
 # LLM_MODEL=gemini/gemini-3.8-flash       # needs GEMINI_API_KEY
 # LLM_MODEL=ollama/qwen2.5:7b             # local, free
 MAX_RPM=30                                # requests per minute cap
+REASONING_EFFORT=low                      # gpt-5 thinking effort; empty = model default
+# LANGSMITH_TRACING=true                  # monitoring (see "Monitoring with LangSmith")
+# LANGSMITH_API_KEY=lsv2_...
+# LANGSMITH_PROJECT=jyotisha-council
 # PROFILE_KEY=...                         # optional Fernet key for encrypted profiles
 ```
 
@@ -293,17 +312,19 @@ python main.py --quiet ...      # hide the agents' step-by-step log, show only t
 crewai-project/
   .env / .env.example   API key, model, rate limit, optional PROFILE_KEY
   requirements.txt
-  evals/                behaviour evals: cases.yaml, run_evals.py, last_results.json
+  evals/                behaviour evals (cases.yaml, run_evals.py), benchmark.py,
+                        langsmith_report.py, benchmarks/REPORT.md
   jyotisha_council/
     crew.py             the council: 5 agents, 5 tasks, handoff wiring, run_council() with metrics
-    chat.py             Parashar as chat host: 4 tools, consult_council handoff, saved sessions
+    chat.py             Parashar as orchestrator: handoff tools for each agent, saved sessions
+    observability.py    LangSmith tracing (OpenTelemetry) and per-agent spans
     main.py             terminal version
     api.py              FastAPI server for the React chat (streams each turn)
     common.py           places, languages, disclaimers, error messages
     store.py            ledger, encrypted profiles, sessions, delete-on-request
     tools.py            council tools around deterministic code; per-reading state
     guardrails.py       input, evidence, safety and chat guardrails (en/ne/ja)
-    config/*.yaml       agent roles, task instructions, host instructions
+    config/*.yaml       agent roles, task instructions, orchestrator and handoff instructions
     astro/ganita.py     Swiss Ephemeris chart + Vimshottari dasha
     astro/shastra.py    rule engine, calibrated evidence strength, labels
     scripts/base_rates.py  builds data/base_rates.json from 3,000 random charts

@@ -1,0 +1,138 @@
+{
+  "summary": {
+    "label": "baseline",
+    "timestamp": "2026-10-18T13:08:30+00:00",
+    "reasoning_effort": "(provider default)",
+    "model": "gpt-5-mini",
+    "all_correct": true,
+    "total_tokens": 61222,
+    "total_llm_calls": 32,
+    "avg_reading_tokens": 19727,
+    "avg_reading_seconds": 77.2,
+    "langsmith": {
+      "llm_runs": 35,
+      "total_tokens": 69108,
+      "project": "jyotisha-baseline"
+    }
+  },
+  "results": [
+    {
+      "scenario": "hello",
+      "correct": true,
+      "seconds": 5.0,
+      "llm_calls": 1,
+      "total_tokens": 2042,
+      "reading_metrics": null,
+      "handoffs": [],
+      "skipped": []
+    },
+    {
+      "scenario": "reading_en",
+      "correct": true,
+      "seconds": 71.1,
+      "llm_calls": 10,
+      "total_tokens": 18502,
+      "reading_metrics": {
+        "seconds_total": 57.5,
+        "seconds_by_agent": {
+          "ganita": 5.0,
+          "shastra": 13.6,
+          "guardian": 15.8
+        },
+        "tokens_by_agent": {
+          "ganita": 1322,
+          "shastra": 2710,
+          "guardian": 2064,
+          "parashar": 8071
+        },
+        "llm_calls": 8,
+        "prompt_tokens": 8869,
+        "completion_tokens": 5298,
+        "total_tokens": 14167,
+        "model": "gpt-5-mini"
+      },
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": [
+        "smriti"
+      ]
+    },
+    {
+      "scenario": "reading_ja",
+      "correct": true,
+      "seconds": 98.9,
+      "llm_calls": 10,
+      "total_tokens": 21445,
+      "reading_metrics": {
+        "seconds_total": 77.9,
+        "seconds_by_agent": {
+          "ganita": 7.6,
+          "shastra": 14.1,
+          "guardian": 36.0
+        },
+        "tokens_by_agent": {
+          "ganita": 1761,
+          "shastra": 2783,
+          "guardian": 3452,
+          "parashar": 8416
+        },
+        "llm_calls": 8,
+        "prompt_tokens": 9236,
+        "completion_tokens": 7176,
+        "total_tokens": 16412,
+        "model": "gpt-5-mini"
+      },
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": [
+        "smriti"
+      ]
+    },
+    {
+      "scenario": "reading_ne",
+      "correct": true,
+      "seconds": 61.6,
+      "llm_calls": 11,
+      "total_tokens": 19233,
+      "reading_metrics": {
+        "seconds_total": 33.3,
+        "seconds_by_agent": {
+          "ganita": 3.0,
+          "shastra": 8.1,
+          "guardian": 18.6
+        },
+        "tokens_by_agent": {
+          "ganita": 1321,
+          "shastra": 1595,
+          "guardian": 2295,
+          "parashar": 9344
+        },
+        "llm_calls": 9,
+        "prompt_tokens": 10443,
+        "completion_tokens": 4112,
+        "total_tokens": 14555,
+        "model": "gpt-5-mini"
+      },
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": [
+        "smriti"
+      ]
+    }
+  ]
+}

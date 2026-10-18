@@ -29,6 +29,18 @@ class _StateTool(BaseTool):
 
 # --- Ganita -----------------------------------------------------------------
 
+def chart_summary(chart: dict) -> str:
+    """The chart as a few compact lines (about a third of the tokens of the JSON)."""
+    d = chart["dasha"]
+    planets = "; ".join(
+        f"{n} {p['sign']} {p['degree']:.0f}° H{p['house']}" + ("" if p["dignity"] == "neutral" else f" {p['dignity']}")
+        for n, p in chart["planets"].items()
+    )
+    return (f"Lagna {chart['lagna']}; Moon sign {chart['moon_sign']}; nakshatra {chart['nakshatra']}.\n"
+            f"Mahadasha {d['mahadasha']} to {d['mahadasha_until']}; antardasha {d['antardasha']} "
+            f"to {d['antardasha_until']}.\nPlanets: {planets}.")
+
+
 class NoInput(BaseModel):
     pass
 
@@ -49,7 +61,7 @@ class ChartCalculatorTool(_StateTool):
         except Exception as exc:  # bad date/time/timezone: tell the agent, don't crash
             return f"ERROR: could not compute chart ({exc})."
         self.state["chart"] = chart
-        return json.dumps(chart, indent=1)
+        return chart_summary(chart)
 
 
 # --- Shastra ----------------------------------------------------------------
@@ -82,8 +94,10 @@ class RuleLookupTool(_StateTool):
             if m["how_common"] is not None else m
             for m in matches
         ]
+        for m in for_writer:  # the writer needs the claim and its evidence, not the classical name
+            m.pop("name", None)
         return json.dumps({"topic": topic, "evidence_strength": strength, "matches": for_writer},
-                          indent=1, ensure_ascii=False)
+                          ensure_ascii=False, separators=(",", ":"))
 
 
 # --- Smriti -----------------------------------------------------------------
@@ -104,4 +118,6 @@ class LedgerRecallTool(_StateTool):
         mine = ledger_for(name)
         if not mine:
             return "No past consultations for this person. This is their first visit."
-        return json.dumps(mine[-5:], indent=1, ensure_ascii=False)
+        recent = [{"date": e["timestamp"][:10], "question": e["question"], "outcome": e["outcome"]}
+                  for e in mine[-5:]]  # questions and outcomes; the full past answers are not needed
+        return json.dumps(recent, ensure_ascii=False, separators=(",", ":"))

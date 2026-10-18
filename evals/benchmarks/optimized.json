@@ -1,0 +1,142 @@
+{
+  "summary": {
+    "label": "optimized",
+    "timestamp": "2026-10-18T13:24:53+00:00",
+    "reasoning_effort": "low (minimal for Ganita/Smriti)",
+    "model": "gpt-5-mini",
+    "all_correct": true,
+    "total_tokens": 43205,
+    "total_llm_calls": 38,
+    "avg_reading_tokens": 13897,
+    "avg_reading_seconds": 31.5,
+    "langsmith": {
+      "llm_runs": 38,
+      "total_tokens": 43205,
+      "project": "jyotisha-optimized"
+    }
+  },
+  "results": [
+    {
+      "scenario": "hello",
+      "correct": true,
+      "seconds": 3.6,
+      "llm_calls": 1,
+      "total_tokens": 1513,
+      "reading_metrics": null,
+      "answer": null,
+      "handoffs": [],
+      "skipped": []
+    },
+    {
+      "scenario": "reading_en",
+      "correct": true,
+      "seconds": 31.4,
+      "llm_calls": 13,
+      "total_tokens": 14035,
+      "reading_metrics": {
+        "seconds_total": 22.3,
+        "seconds_by_agent": {
+          "ganita": 2.4,
+          "shastra": 4.2,
+          "smriti": 2.6,
+          "guardian": 8.1
+        },
+        "tokens_by_agent": {
+          "ganita": 826,
+          "shastra": 1612,
+          "smriti": 633,
+          "guardian": 970,
+          "parashar": 6921
+        },
+        "llm_calls": 11,
+        "prompt_tokens": 9514,
+        "completion_tokens": 1448,
+        "total_tokens": 10962,
+        "model": "gpt-5-mini"
+      },
+      "answer": "Direct answer: Taking the Japan job may be favorable for growth and learning but may require persistence; it could work well if you accept, given that your current Jupiter mahadasha is associated with expansion and travel. Why (Evidence Mode): • Strong self and initiative: Mars as lord of 1 in house 1 supports you taking new roles [R-GEN-02]. • Career needs persistence: Saturn (lord of 10) in house 12 indicates potential for delays and extra effort required for progress abroad [R-CAR-06]. • Travel and mentoring supported by Jupiter in house 11 and running Jupiter mahadasha: favorable for opportunities and learning [R-GEN-03][R-DAS-JUP]. Timing: You are in Jupiter mahadasha until 2036-03-21; current antardasha Mercury until 2027-02-25 — potentially favorable for learning but be mindful of communication issues because Mercury is debilitated. Confidence: Moderate — rules fit partially and evidence strength is limited; read common rules honestly. Practical suggestion: You might consider accepting while planning for a probation period and seeking clear terms (duration, visa support, probation pay).",
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": []
+    },
+    {
+      "scenario": "reading_ja",
+      "correct": true,
+      "seconds": 30.1,
+      "llm_calls": 10,
+      "total_tokens": 11940,
+      "reading_metrics": {
+        "seconds_total": 20.5,
+        "seconds_by_agent": {
+          "ganita": 2.9,
+          "shastra": 4.4,
+          "guardian": 6.4
+        },
+        "tokens_by_agent": {
+          "ganita": 848,
+          "shastra": 1336,
+          "guardian": 1133,
+          "parashar": 5531
+        },
+        "llm_calls": 8,
+        "prompt_tokens": 7094,
+        "completion_tokens": 1754,
+        "total_tokens": 8848,
+        "model": "gpt-5-mini"
+      },
+      "answer": "結論: 来年（2027年）は転職の選択を慎重に検討する時期と考えられます。大きな野心が高まりやすい一方で、エネルギーと日常業務の負担に注意が必要かもしれません。\n根拠（エビデンス）: \n- ラーフ期で野心や変化志向が強まる傾向がある [R-DAS-RAH]\n- ラグナの主ムーンが第6室にあり、日常の業務負担や体力・エネルギー管理を優先する必要がある可能性が示唆される [R-GEN-04]\nタイミング: 現在はラーフ大限（〜2038-06-21）で、土星小限は2028-06-02まで続きます。短期的には2028年6月までの影響を見て判断することが一つの考え方です。\n確信度: シャーストラの証拠は限定的で一般的な指針に留まります（高確率の断定は不可）。\n実践的なアドバイス: 今すぐ大きく動く前に、現在の仕事でのエネルギー負担を1か月記録してみる（週ごとの疲労と満足度をメモする）ことを検討してみてください。",
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": [
+        "smriti"
+      ]
+    },
+    {
+      "scenario": "reading_ne",
+      "correct": true,
+      "seconds": 33.0,
+      "llm_calls": 14,
+      "total_tokens": 15717,
+      "reading_metrics": {
+        "seconds_total": 24.2,
+        "seconds_by_agent": {
+          "ganita": 2.7,
+          "shastra": 2.5,
+          "smriti": 2.0,
+          "guardian": 7.0
+        },
+        "tokens_by_agent": {
+          "ganita": 821,
+          "shastra": 887,
+          "smriti": 603,
+          "guardian": 895,
+          "parashar": 9361
+        },
+        "llm_calls": 12,
+        "prompt_tokens": 10957,
+        "completion_tokens": 1610,
+        "total_tokens": 12567,
+        "model": "gpt-5-mini"
+      },
+      "answer": "सीधा उत्तर: यस वर्ष तपाईंको पढाइमा निरन्तरताको बल देखिन्छ; मेहनतले लाभ दिलाउने सम्भावना छ तर परिणाम आउन समय लाग्न सक्छ।\nकिन (प्रमाण):\n- चलिरहेको शनि महादशाले धैर्य, अनुशासन र निरन्तर अभ्यास समर्थन गर्छ [R-DAS-SAT].\nसमय: शनि महादशा 2040-12-19 सम्म चलिरहेको छ; हालको उत्साह र स्थिरता आगामी वर्षहरूमा पनि जारी रहन सक्छ भन्ने संकेत देखिन्छ।\nविश्वास स्तर: मध्यम — शास्त्रीय नियमले धैर्य र दीर्घकालीन प्रयासलाई बल दिन्छ, तर प्रमाण सीमित छ।\nव्यावहारिक सुझाव: तपाईंले विचार गर्न सक्नुहुन्छ कि आजैबाट दैनिक ३०–६० मिनेटको सानो पढाइ तालिका सुरु गर्नु र हरेक सप्ताह नोट्स पुनरावृत्ति गर्नुहोस्।",
+      "handoffs": [
+        "ganita",
+        "shastra",
+        "smriti",
+        "parashar",
+        "guardian"
+      ],
+      "skipped": []
+    }
+  ]
+}

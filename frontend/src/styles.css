@@ -529,3 +529,6 @@ th { color: var(--muted); font-weight: 500; font-size: 12px; }
   /* Side panel takes the full width on small phones. */
   .sidebar { width: 100vw; padding-top: max(16px, env(safe-area-inset-top)); }
 }
+.step.skipped { opacity: .55; }
+.step.skipped .step-dot { border-style: dashed; }
+.state.skipped { background: transparent; border: 1px dashed var(--border); }

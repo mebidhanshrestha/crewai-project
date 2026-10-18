@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from observability import setup_tracing  # noqa: E402
+
+setup_tracing()  # before CrewAI is imported anywhere, so its agents and LLM calls are traced
+
 # Small built-in gazetteer: (latitude, longitude, timezone)
 PLACES = {
     "kathmandu": (27.7172, 85.3240, "Asia/Kathmandu"),

@@ -1,0 +1,26 @@
+# What each specialist is asked when the orchestrator (Parashar) hands off to it.
+# {placeholders} are filled in by chat.py.
+
+ganita: >
+  Call chart_calculator once (it takes no arguments). Reply in at most 6 short lines:
+  lagna, Moon sign, nakshatra, running mahadasha and antardasha with end dates, and any
+  exalted or debilitated planets. Facts only, no interpretation.
+
+shastra: >
+  The person asks: "{question}". Call rule_lookup once for each of these topics: {topics}.
+  Reply with the evidence_strength (strength, percentile) and one line per matched rule:
+  rule ID, label, tone, how common it is, and its chart evidence. No interpretation.
+
+smriti: >
+  Call ledger_recall for "{name}". In at most 3 lines, say whether there are past
+  readings related to: "{question}", and any recorded outcomes. If none, say "No history."
+
+guardian: >
+  Review this draft reading for {name} written in {language}. Rewrite only what breaks
+  these rules: no predictions about death, illness, accidents, divorce or legal outcomes;
+  no fear-mongering; nothing stated as certain or guaranteed; no paid remedies or prices;
+  a view, not a command. Keep the structure, the language and every rule ID exactly.
+  Return the final reading only, with no notes.
+
+  DRAFT:
+  {draft}
